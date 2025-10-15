@@ -1,0 +1,35 @@
+BasedOnStyle: LLVM
+
+# Use tabs (not spaces) for indentation
+UseTab: ForIndentation  
+
+# Indent width (how much logical indent)  
+IndentWidth: 4  
+
+# Tab width (size of a tab)  
+TabWidth: 4  
+
+# Maximum column width (wrap/hard wrap)  
+ColumnLimit: 120  
+
+# How much to indent when a line is continued (after a wrap)
+ContinuationIndentWidth: 4  
+
+# Whether to align parameters after an open bracket, or indent them
+AlignAfterOpenBracket: Align  
+
+# If pointers should “*” associate with type or variable
+DerivePointerAlignment: false  
+PointerAlignment: Left  
+
+# Indentation of case labels
+IndentCaseLabels: true  
+
+# Whether to indent namespaces
+NamespaceIndentation: All  
+
+# Indentation of access modifiers (public / private / protected)
+AccessModifierOffset: 0  
+
+# Brace placement style 
+BreakBeforeBraces: Attach  
