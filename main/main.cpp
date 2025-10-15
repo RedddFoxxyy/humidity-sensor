@@ -37,7 +37,7 @@ void oled_init() {
 
 	ssd1306_init(i2c_bus, &config, &oled_dev);
 	if (oled_dev == nullptr) {
-		printf("OLED init failed!\n");
+		std::cout << "OLED init failed!" << std::endl;
 		return;
 	}
 	ssd1306_set_contrast(oled_dev, 0xFF);
@@ -48,7 +48,7 @@ void oled_display_readings(float temperature, float humidity) {
 	if (oled_dev == nullptr)
 		return;
 
-	ssd1306_clear_display(oled_dev, false);
+	// ssd1306_clear_display(oled_dev, false);
 
 	char buf[32];
 
@@ -60,7 +60,7 @@ void oled_display_readings(float temperature, float humidity) {
 }
 
 int main() {
-	printf("Starting DHT11 + OLED with esp_ssd1306 demo\n");
+	std::cout << "Starting DHT11 + OLED with esp_ssd1306 demo" << std::endl;
 
 	i2c_init_for_oled();
 	oled_init();
@@ -69,17 +69,17 @@ int main() {
 
 	while (true) {
 		if (dht_read_float_data(SENSOR_TYPE, (gpio_num_t)DHT_GPIO, &humidity, &temperature) == ESP_OK) {
-			printf("\rHumidity: %.1f%% | Temperature: %.1f C   ", humidity, temperature);
+			std::cout << "\rHumidity: " << humidity << "% | Temperature: " << temperature << " C   " << std::flush;
 			oled_display_readings(temperature, humidity);
 		} else {
-			printf("\rFailed to read from DHT sensor!            ");
+			std::cout << "\rFailed to read from DHT sensor!            " << std::flush;
 			if (oled_dev) {
 				ssd1306_clear_display(oled_dev, false);
 				ssd1306_display_text(oled_dev, 0, "Sensor error!", false);
 			}
 		}
 
-		vTaskDelay(pdMS_TO_TICKS(1000));
+		vTaskDelay(pdMS_TO_TICKS(50));
 	}
 
 	return 0;
